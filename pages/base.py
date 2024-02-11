@@ -24,12 +24,12 @@ class Base:
         :param locator: Локатор элемента.
         :param timeout: Время ожидания элемента в секундах.
         """
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((by, locator)))
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_all_elements_located((by, locator)))
 
     def click(self,
               by: By,
               locator: str,
-              timeout=10
+              timeout=30
               ) -> None:
         """
         Нажимает на элемент, предварительно ожидая его кликабельности.
@@ -40,14 +40,17 @@ class Base:
         """
         WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((by, locator))).click()
 
-    def find_elements(self,
+    def find_element(self,
                       by: By,
-                      locator: str
-                      ) -> List[WebElement]:
+                      locator: str,
+                      key: str):
         """
         Возвращает список элементов, найденных по локатору.
 
         :param by: Стратегия поиска элемента.
         :param locator: Локатор элемента.
         """
-        return self.driver.find_elements(by, locator)
+        element = self.driver.find_element(by, locator)
+        element.send_keys(key)
+        element = None
+

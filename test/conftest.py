@@ -14,11 +14,6 @@ def drivers ():
     yield driver
     driver.quit()
 
-
-def test_1 (drivers):
-     print("w")
-     time.sleep(10)
-
 @pytest.fixture
 def main_page(drivers):
     """Предоставляет объект для работы с главной страницей."""

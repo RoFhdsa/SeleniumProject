@@ -20,4 +20,7 @@ class Users:
 class pages_authentication:
     """список полей на странице аутентификации"""
     marker: str = "id"
-    title: str = "user-name"
+    title_lgn: str = "user-name"
+    title_pswrd: str = "password"
+    title_enter: str = "login-button"
+

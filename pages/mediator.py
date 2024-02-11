@@ -16,9 +16,13 @@ class Mediator(Base):
         element_by_attribute = f"//*[@{attribute_name}='{attribute_value}']"
         print(f'element_by_attribute = {element_by_attribute}')
         return self.wait_element_located(locator=element_by_attribute, timeout=10)
-    pass
 
-    # def add_favorites_first_advt(self):
-    #     """Добавляет первое в списке объявление в избранное."""
-    #     self.get_element_by_attribute(ElementAttributes.marker, "favorites-add").click()
-    #     return self
+
+    def authentication (self, username, password)  ->True or TimeoutException:
+
+        self.find_element(By.XPATH, self.category_locator.format(
+            pages_authentication.marker, pages_authentication.title_lgn), username)
+        self.find_element(By.XPATH, self.category_locator.format(
+            pages_authentication.marker, pages_authentication.title_pswrd), password)
+        self.click(By.XPATH, self.category_locator.format(
+            pages_authentication.marker, pages_authentication.title_enter))
