@@ -1,10 +1,9 @@
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from DATA.data_connect import pages_authentication
 from pages.base import Base
 
-from DATA.data_connect import pages_authentication
+from DATA.data_connect import PegaAuthentication as pa, PegaElements as pe
 
 class Mediator(Base):
     def get_element_by_attribute(self, attribute_name: str, attribute_value: str) -> WebElement:
@@ -18,11 +17,38 @@ class Mediator(Base):
         return self.wait_element_located(locator=element_by_attribute, timeout=10)
 
 
-    def authentication (self, username, password)  ->True or TimeoutException:
-
-        self.find_element(By.XPATH, self.category_locator.format(
-            pages_authentication.marker, pages_authentication.title_lgn), username)
-        self.find_element(By.XPATH, self.category_locator.format(
-            pages_authentication.marker, pages_authentication.title_pswrd), password)
+    def authenticate (self, username: str, password: str)  -> True or TimeoutException:
+        self.find_input_field(By.XPATH, self.category_locator.format(
+            pa.marker, pa.title_lgn), username)
+        self.find_input_field(By.XPATH, self.category_locator.format(
+            pa.marker, pa.title_pswrd), password)
         self.click(By.XPATH, self.category_locator.format(
-            pages_authentication.marker, pages_authentication.title_enter))
+            pa.marker, pa.title_enter))
+        try:
+            find_err_text = self.find_element(By.XPATH,
+                                     self.category_locator.format(pa.marker,
+                                                                    pa.title_enter_err) + pa.additional_locator_error)
+            return find_err_text.text
+        except:
+            return self.return_actual_url()
+
+    def get_elements (self,):
+        elements =self.get_all_elements(By.XPATH, self.category_locator.format(pe.marker,
+                                                                     pe.title_inventory) + pe.add_title_inventory)
+        products_info = []
+        locator_div: dict = field(default_factory=lambda:
+        {'name': 'inventory_item_name',
+         'price': 'inventory_item_price',
+         'inventory_item_img': 'inventory_item_img'})
+
+        for element in elements:
+            product = {}
+            product['name'] = element.find_element(By.CLASS_NAME,
+                                                   'inventory_item_name').text  # Получаем название товара
+            product['price'] = element.find_element(By.CLASS_NAME, 'inventory_item_price').text  # Получаем цену товара
+            product['image'] = element.find_element(By.CLASS_NAME, 'inventory_item_img').find_element(By.TAG_NAME,
+                                                                                                      'img').get_attribute(
+                'src')  # Получаем атрибут 'src' картинки
+            products_info.append(product)
+
+        return products_info
