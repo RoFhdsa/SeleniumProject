@@ -9,7 +9,6 @@ from DATA.data_connect import pages_authentication
         ("standard_user", "secret_sauce"),
         ("locked_out_user", "secret_sauce"),
         ("problem_user", "secret_sauce"),
-        ("problem_user", "secret_sauce"),
     ]
 )
 def test_user_pwd(main_page, username, password):
