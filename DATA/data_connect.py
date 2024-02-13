@@ -31,7 +31,7 @@ class PegaElements:
     """локаторы """
     marker: str = "id"
     title_inventory: str = "inventory_container"
-    add_title_inventory: str = '/ div'
+    add_title_inventory: str = '/div/div'
     locator_div: dict = field(default_factory= lambda  :
     {'name':'inventory_item_name',
                       'price':'inventory_item_price',
