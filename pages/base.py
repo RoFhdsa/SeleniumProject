@@ -44,6 +44,7 @@ class Base:
         :param by: Стратегия поиска элемента.
         :param locator: Локатор элемента.
         """
+        print(f'self.driver.find_element(by, locator) = {self.driver.find_element(by, locator)}')
         return self.driver.find_element(by, locator)
 
     def find_input_field(self, by: By, locator: str, key: str):

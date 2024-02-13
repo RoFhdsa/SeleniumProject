@@ -36,11 +36,6 @@ class Mediator(Base):
         elements =self.get_all_elements(By.XPATH, self.category_locator.format(pe.marker,
                                                                      pe.title_inventory) + pe.add_title_inventory)
         products_info = []
-        locator_div: dict = field(default_factory=lambda:
-        {'name': 'inventory_item_name',
-         'price': 'inventory_item_price',
-         'inventory_item_img': 'inventory_item_img'})
-
         for element in elements:
             product = {}
             product['name'] = element.find_element(By.CLASS_NAME,
@@ -52,3 +47,14 @@ class Mediator(Base):
             products_info.append(product)
 
         return products_info
+    # def processing_elements(self, elements, dict_locator):
+    #     search_value = {}
+    #     for locator, values in dict_locator.items():
+    #         {
+    #
+    #         }[locator]
+    #     for element in elements:
+    #
+    #             search_value ['name'] = element.find_element(By.CLASS_NAME,
+    #                                                'inventory_item_name').text
+    #     pass

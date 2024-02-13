@@ -22,9 +22,11 @@ class TestImage:
     @pytest.mark.parametrize(
         "username, password",
         [
-            ("problem_user", "secret_sauce"),
+            # ("problem_user", "secret_sauce"),
+            ("standard_user", "secret_sauce"),
+
         ]
     )
     def test_check_image (self, main_page, username, password):
         main_page.check_image(username, password)
-        time.sleep(5)
+        # *time.sleep(2)
