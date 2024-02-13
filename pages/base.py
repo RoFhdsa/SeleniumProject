@@ -1,9 +1,7 @@
-from typing import List
-
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class Base:
@@ -12,7 +10,7 @@ class Base:
     def __init__(self, driver):
         self.driver = driver
 
-    def wait_element_located(self,
+    def get_all_elements(self,
                              by: By,
                              locator: str,
                              timeout=10
@@ -40,17 +38,22 @@ class Base:
         """
         WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable((by, locator))).click()
 
-    def find_element(self,
-                      by: By,
-                      locator: str,
-                      key: str):
+    def find_element(self, by: By, locator: str):
         """
         Возвращает список элементов, найденных по локатору.
+        :param by: Стратегия поиска элемента.
+        :param locator: Локатор элемента.
+        """
+        return self.driver.find_element(by, locator)
 
+    def find_input_field(self, by: By, locator: str, key: str):
+        """
+        Возвращает список элементов, найденных по локатору.
         :param by: Стратегия поиска элемента.
         :param locator: Локатор элемента.
         """
         element = self.driver.find_element(by, locator)
         element.send_keys(key)
-        element = None
 
+    def return_actual_url(self):
+        return self.driver.current_url
