@@ -1,6 +1,6 @@
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from  DATA.data_connect import PegaElements as pe, PegaAuthentication as pa
+from  DATA.data_test import PegaElements as pe, PegaAuthentication as pa
 
 from pages.mediator import Mediator
 
