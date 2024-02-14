@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from pages.base import Base
 
-from DATA.data_connect import PegaAuthentication as pa, PegaElements as pe
+from DATA.data_test import PegaAuthentication as pa, PegaElements as pe
 
 class Mediator(Base):
     def get_element_by_attribute(self, attribute_name: str, attribute_value: str) -> WebElement:

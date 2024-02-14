@@ -5,6 +5,13 @@ class URL:
     """url подключения к сайту"""
     url: str = "https://www.saucedemo.com/"
 
+
+@dataclass
+class BD:
+    """данные для подключения БД"""
+    path_bd_origin: str = f'sqlite:///A:/_work/Phyton/SeleniumProject/src/DATA_origin.db'
+    path_bd_replic: str = f'sqlite:///.DATA_replic.db'
+
 @dataclass
 class Users:
     """список пользователей"""
@@ -36,3 +43,4 @@ class PegaElements:
     {'name':'inventory_item_name',
                       'price':'inventory_item_price',
                       'inventory_item_img':'inventory_item_img'})
+
