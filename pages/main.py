@@ -1,7 +1,7 @@
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from  DATA.data_test import PegaElements as pe, PegaAuthentication as pa
-
+from src.Products.ProductSQL import ProductSQL
 from pages.mediator import Mediator
 
 
@@ -23,6 +23,8 @@ class MainPage(Mediator):
     def check_log_in(self, username, password) ->True or TimeoutException:
         return self.authenticate (username, password)
 
-    def check_image(self, username, password) -> True or TimeoutException:
+    def check_products(self, username, password) -> True or TimeoutException:
         self.authenticate(username, password)
-        print(self.get_elements())
+        product_page = self.get_elements()
+        print(f'product_page ={product_page}')
+        return product_page

@@ -17,7 +17,7 @@ class Mediator(Base):
         return self.wait_element_located(locator=element_by_attribute, timeout=10)
 
 
-    def authenticate (self, username: str, password: str)  -> True or TimeoutException:
+    def authenticate (self, username: str, password: str)  -> str:
         self.find_input_field(By.XPATH, self.category_locator.format(
             pa.marker, pa.title_lgn), username)
         self.find_input_field(By.XPATH, self.category_locator.format(
@@ -32,10 +32,10 @@ class Mediator(Base):
         except:
             return self.return_actual_url()
 
-    def get_elements (self,):
+    def get_elements (self,) -> list:
         elements =self.get_all_elements(By.XPATH, self.category_locator.format(pe.marker,
                                                                      pe.title_inventory) + pe.add_title_inventory)
-        products_info = []
+        element_data = []
         for element in elements:
             product = {}
             product['name'] = element.find_element(By.CLASS_NAME,
@@ -44,9 +44,9 @@ class Mediator(Base):
             product['image'] = element.find_element(By.CLASS_NAME, 'inventory_item_img').find_element(By.TAG_NAME,
                                                                                                       'img').get_attribute(
                 'src')  # Получаем атрибут 'src' картинки
-            products_info.append(product)
+            element_data.append(product)
 
-        return products_info
+        return element_data
     # def processing_elements(self, elements, dict_locator):
     #     search_value = {}
     #     for locator, values in dict_locator.items():

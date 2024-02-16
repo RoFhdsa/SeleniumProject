@@ -58,3 +58,5 @@ class Base:
 
     def return_actual_url(self):
         return self.driver.current_url
+
+
