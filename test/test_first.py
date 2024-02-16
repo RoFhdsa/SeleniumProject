@@ -19,7 +19,7 @@ class TestAuthentication:
         # time.sleep(5)
 
 
-class TestImage:
+class TestProducts:
 
     @pytest.mark.parametrize(
         "username, password, result",
