@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 
+
 from src.Products.ProductSQL import ProductSQL
 from src.db import Base, syns_engine
 from src.Products import models_product
@@ -17,12 +18,12 @@ def create_tables ():
 
 @pytest.fixture()
 def drivers():
+
     """инициализация драйвера"""
     driver = webdriver.Chrome()
     driver.get(URL.url)
     yield driver
     driver.quit()
-
 
 @pytest.fixture
 def main_page(drivers):
