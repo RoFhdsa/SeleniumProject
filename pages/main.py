@@ -1,7 +1,8 @@
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from  DATA.data_connect import pages_authentication
-
+from  DATA.data_test import PegaElements as pe, PegaAuthentication as pa
+from src.Products.ProductSQL import ProductSQL
 from pages.mediator import Mediator
 
 
@@ -15,18 +16,16 @@ class MainPage(Mediator):
     def check_authentication_field(self) -> True or TimeoutException:
         """Проверка наличия элементов"""
         a = self.wait_element_located(By.XPATH,
-                                  self.category_locator.format(
-                                      pages_authentication.marker, pages_authentication.title_lgn))
+                                      self.category_locator.format(
+                                      pa.marker, pa.title_lgn))
         print(f' visibility_of_all_elements_located  = {a[0] , type(a[0])}')
         return True
 
     def check_log_in(self, username, password) ->True or TimeoutException:
+        return self.authenticate (username, password)
 
-        self.authentication(username, password)
-         # вызываем в медиаторе метод аутентиафикации передвая в него наш логин
-         # self.find_element(By.XPATH, self.category_locator.format(
-         #                              pages_authentication.marker, pages_authentication.title_lgn), "standard_user")
-         # self.find_element(By.XPATH, self.category_locator.format(
-         #     pages_authentication.marker, pages_authentication.title_pswrd), "secret_sauce")
-         # self.click(By.XPATH,  self.category_locator.format(
-         #     pages_authentication.marker, pages_authentication.title_enter))
+    def check_products(self, username, password) -> True or TimeoutException:
+        self.authenticate(username, password)
+        product_page = self.get_elements()
+        print(f'product_page ={product_page}')
+        return product_page
