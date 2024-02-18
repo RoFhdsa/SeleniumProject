@@ -1,10 +1,9 @@
 
 import time
-
 import pytest
 import allure
-
 from src.Products.ProductSQL import ProductSQL
+from src.Products.product_data import Products
 
 
 class TestAuthentication:
@@ -36,6 +35,7 @@ class TestProducts:
     def test_check_products(self, main_page, username, password, result):
         with allure.step(f"Проверка отображения продуктовой страницы для пользователя {username}"):
             product_page = main_page.check_products(username, password)
+
             original_product = ProductSQL.get_product()
             for row in product_page:
                 assert (row in original_product) == result
