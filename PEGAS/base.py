@@ -1,4 +1,6 @@
-
+from datetime import datetime
+from os import mkdir
+import string, secrets
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -61,6 +63,17 @@ class Base:
         return self.driver.current_url
 
     def create_screenshot(self, name_screenshot: str) -> str:
-        self.driver.get_screenshot_as_file(name_screenshot + '.png')
-        return name_screenshot + '.png'
+        path = self.create_dir() + name_screenshot + '.png'
+        self.driver.get_screenshot_as_file(path)
+        return path
 
+    @staticmethod
+    def create_dir() -> str:
+        dir_data = datetime.date(datetime.today()).strftime('%d-%m-%y')
+        try:
+            mkdir(dir_data)
+        except FileExistsError:
+            pass
+        alph = string.digits + string.ascii_uppercase
+        id = ''.join(secrets.choice(alph) for r in range(32))
+        return dir_data + '\\'+id +'_'
