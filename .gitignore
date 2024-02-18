@@ -24,6 +24,8 @@ parts/
 sdist/
 var/
 wheels/
+allure-2.27.0/
+allure-results/
 share/python-wheels/
 *.egg-info/
 .installed.cfg

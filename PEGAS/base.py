@@ -59,3 +59,8 @@ class Base:
 
     def return_actual_url(self):
         return self.driver.current_url
+
+    def create_screenshot(self, name_screenshot: str) -> str:
+        self.driver.get_screenshot_as_file(name_screenshot + '.png')
+        return name_screenshot + '.png'
+
