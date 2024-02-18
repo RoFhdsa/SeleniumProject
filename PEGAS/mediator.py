@@ -2,7 +2,7 @@
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from pages.base import Base
+from PEGAS.base import Base
 
 from DATA.data_test import PegaAuthentication as pa, PegaElements as pe
 
@@ -34,6 +34,7 @@ class Mediator(Base):
             return self.return_actual_url()
 
     def get_elements (self,) -> list:
+
         elements =self.get_all_elements(By.XPATH, self.category_locator.format(pe.marker,
                                                                      pe.title_inventory) + pe.add_title_inventory)
         element_data = []
@@ -48,14 +49,3 @@ class Mediator(Base):
             element_data.append(product)
 
         return element_data
-    # def processing_elements(self, elements, dict_locator):
-    #     search_value = {}
-    #     for locator, values in dict_locator.items():
-    #         {
-    #
-    #         }[locator]
-    #     for element in elements:
-    #
-    #             search_value ['name'] = element.find_element(By.CLASS_NAME,
-    #                                                'inventory_item_name').text
-    #     pass
