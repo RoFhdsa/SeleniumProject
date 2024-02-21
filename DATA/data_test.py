@@ -34,8 +34,8 @@ class PegaAuthentication:
     additional_locator_error: str = '/div/form/div[3]/h3'
 
 @dataclass
-class PegaElements:
-    """локаторы """
+class PegaCatalog:
+    """локаторы страницы каталога"""
     marker: str = "id"
     title_inventory: str = "inventory_container"
     add_title_inventory: str = '/div/div'
@@ -43,4 +43,6 @@ class PegaElements:
     {'name':'inventory_item_name',
                       'price':'inventory_item_price',
                       'inventory_item_img':'inventory_item_img'})
+    button_buy: str = "btn btn_primary btn_small btn_inventory"
+    locator_product: str = "div.inventory_item_name"
 
