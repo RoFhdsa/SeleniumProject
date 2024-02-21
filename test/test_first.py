@@ -1,5 +1,7 @@
 
 import time
+import random
+
 import pytest
 import allure
 from src.Products.ProductSQL import ProductSQL
@@ -50,13 +52,20 @@ class TestProducts:
         allure.dynamic.severity(allure.severity_level.CRITICAL)
         allure.link("https://jira.example.com/ISSUE-123", name="Related issue")
 
-    # @pytest.mark.parametrize(
-    #     "username, password, result",
-    #     [
-    #         # ("problem_user", "secret_sauce", False),
-    #         ("standard_user", "secret_sauce", True),
-    #
-    #     ]
-    # )
-    # def test_byu_products(self, username, password, result):
-    #     pass
+    @pytest.mark.parametrize(
+        "username, password, result",
+        [
+            # ("problem_user", "secret_sauce", False),
+            ("standard_user", "secret_sauce", True),
+
+        ]
+    )
+    def test_byu_products(self, main_page, username, password, result):
+
+
+        original_product = ProductSQL.get_product()
+        any_product = random.choice (original_product)
+        print(f' any_product = {any_product}')
+        main_page.buy_products(username, password, any_product)
+
+        pass

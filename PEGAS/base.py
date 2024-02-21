@@ -71,9 +71,10 @@ class Base:
     def create_dir() -> str:
         dir_data = datetime.date(datetime.today()).strftime('%d-%m-%y')
         try:
-            mkdir(dir_data)
+            path = ( dir_data)
+            mkdir (path)
         except FileExistsError:
             pass
         alph = string.digits + string.ascii_uppercase
         id = ''.join(secrets.choice(alph) for r in range(32))
-        return dir_data + '\\'+id +'_'
+        return path + '\\'+id +'_'

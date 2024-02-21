@@ -16,19 +16,19 @@ from src.Products.product_data import Products
 def create_tables ():
     """Подключенеи к БД"""
     print(f' Подключаюсь к базе')
-    Base.metadata.drop_all(syns_engine)
     Base.metadata.create_all(syns_engine)
     print(f' Создаю таблицу и импортирую в не данные')
     p = Products()
     ProductSQL.insert_data(p.product)
     print(f'Завершил работы')
 
-@pytest.fixture(scope='session')
-def clear_DB (syns_engine):
-    """Очистка СУБД"""
-    print(f'Очищаю данные в базе')
-    yield Base.metadata.drop_all(syns_engine)
-    print(f'Очищаю данные в базе')
+@pytest.fixture(scope='session', autouse=True)
+def clear_DB(request):
+    """Очистка СУБД после тестирования"""
+    def fin():
+        Base.metadata.drop_all(syns_engine)
+        print(f'Очищаю данные в базе в конце работы')
+    request.addfinalizer(fin)
 
 
 @pytest.fixture()
