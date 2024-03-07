@@ -39,6 +39,7 @@ class PegaCatalog:
     marker: str = "id"
     title_inventory: str = "inventory_container"
     add_title_inventory: str = '/div/div'
+    locator_xpath_products: str = '//*[@id="inventory_container"]/div/div'
     locator_div: dict = field(default_factory= lambda  :
     {'name':'inventory_item_name',
                       'price':'inventory_item_price',
@@ -46,3 +47,6 @@ class PegaCatalog:
     button_buy: str = "btn btn_primary btn_small btn_inventory"
     locator_product: str = "div.inventory_item_name"
 
+@dataclass
+class PegaBasket:
+    locator_xpath_products: str = '//*[@id="cart_contents_container"]/div/div'

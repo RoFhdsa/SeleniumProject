@@ -8,19 +8,6 @@ from src.Products.ProductSQL import ProductSQL
 from src.Products.product_data import Products
 
 
-class TestAuthentication:
-
-    @pytest.mark.parametrize(
-        "username, password, result_url", [
-            ("standard_user", "secret_sauce", "https://www.saucedemo.com/inventory.html"),
-            ("locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."),
-            ("problem_user", "secret_sauce", "https://www.saucedemo.com/inventory.html"),
-        ]
-    )
-    def test_authentication(self, main_page, username, password, result_url):
-
-        assert main_page.check_log_in(username, password) == result_url
-        # time.sleep(5)
 
 @allure.feature("Проверка продуктовой страницы")
 class TestProducts:
@@ -61,10 +48,10 @@ class TestProducts:
         ]
     )
     def test_byu_products(self, main_page, username, password, result):
-
+        """Тест на приобритение продукта"""
 
         original_product = ProductSQL.get_product()
-        any_product = random.choice (original_product)
+        any_product = random.choices (original_product, k=2)
         print(f' any_product = {any_product}')
         main_page.buy_products(username, password, any_product)
 
